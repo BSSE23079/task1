@@ -6,52 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muhammad Zubair Akhter | Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts for better typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="progress-bar"></div>
+
+    <nav class="nav-dock">
+        <a href="#about" title="About"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="User" class="nav-icon"></a>
+        <a href="#skills" title="Skills"><img src="https://cdn-icons-png.flaticon.com/512/616/616494.png" alt="Skills" class="nav-icon"></a>
+        <a href="#projects" title="Projects"><img src="https://cdn-icons-png.flaticon.com/512/1087/1087815.png" alt="Projects" class="nav-icon"></a>
+        <a href="#contact" title="Contact"><img src="https://cdn-icons-png.flaticon.com/512/2099/2099199.png" alt="Contact" class="nav-icon"></a>
+    </nav>
 
     <header>
+        <div class="availability-badge">
+            <span class="dot"></span> Open for Opportunities
+        </div>
         <div class="profile-container">
             <img src="zubair.jpeg" alt="Muhammad Zubair Akhter" class="profile-img">
         </div>
         <h1>Muhammad Zubair Akhter</h1>
         <h2>Software Engineer</h2>
         <p>
-            I am a passionate web development learner who enjoys building clean,
-            user-friendly websites and improving my technical skills every day.
+            Architecting scalable cloud solutions and crafting immersive web experiences 
+            with a focus on performance and clean code.
         </p>
     </header>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            REACT • AWS • NODE.JS • MONGODB • TYPESCRIPT • PYTHON • DOCKER • JAVASCRIPT • CSS3 • HTML5 • AWS LAMBDA • TAILWIND • NEXT.JS • 
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+            REACT • AWS • NODE.JS • MONGODB • TYPESCRIPT • PYTHON • DOCKER • JAVASCRIPT • CSS3 • HTML5 • AWS LAMBDA • TAILWIND • NEXT.JS • 
+        </div>
+    </div>
+
+    <section id="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">2+</span>
+                <span class="stat-label">Years Learning</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Dedication</span>
+            </div>
+        </div>
+    </section>
 
     <section id="about">
         <h2>About Me</h2>
         <p>
-            I am currently learning web development and focusing on building strong
-            foundations in HTML, CSS, and JavaScript. I enjoy solving problems and
-            creating projects that help me grow as a developer.
+            I am currently deep-diving into the world of Full-Stack development, 
+            bridging the gap between robust backend architectures and sleek frontend interfaces.
         </p>
         <p>
-            My career goal is to become a skilled front-end developer and work on
-            real-world projects that make a positive impact.
+            My journey is fueled by curiosity and the drive to build products that solve 
+            real-world problems. I specialize in Cloud-native applications and modern JS frameworks.
         </p>
     </section>
 
     <section id="skills">
         <h2>Skills</h2>
-
-        <h3>Technical Skills</h3>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>Git & GitHub</li>
-            <li>AWS</li>
+        <h3>Technical Arsenal</h3>
+        <ul class="skills-list">
+            <li data-type="dev">HTML</li>
+            <li data-type="dev">CSS</li>
+            <li data-type="dev">JavaScript</li>
+            <li data-type="tool">Git & GitHub</li>
+            <li data-type="cloud">AWS</li>
         </ul>
-
-        <h3>Soft Skills</h3>
-        <ul>
+        <h3>Power Skills</h3>
+        <ul class="skills-list">
             <li>Problem Solving</li>
             <li>Communication</li>
             <li>Time Management</li>
@@ -61,55 +94,71 @@
 
     <section id="projects">
         <h2>Projects</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="fullstack">Fullstack</button>
+            <button class="filter-btn" data-filter="cloud">Cloud</button>
+        </div>
 
-        <article>
-            <h3>NADRA</h3>
-            <p>
-                A simple full stack website for maintaing country citizens.
-            </p>
-            <p><strong>Technologies Used:</strong> HTM,CSS, eact, Expres,, MongoDB</p>
-            <p>
-                <a href="https://github.com/BSSE23043/DBMS_Final_Project_G4" target="_blank">
-                    GitHub Repository
-                </a>
-            </p>
-        </article>
+        <div class="projects-grid">
+            <article class="project-card" data-category="fullstack">
+                <div class="project-header">
+                    <h3>NADRA System</h3>
+                    <span class="tag">Fullstack</span>
+                </div>
+                <p>Citizenship management platform featuring secure data handling and real-time validation.</p>
+                <div class="tech-stack">React • Express • MongoDB</div>
+                <a href="https://github.com/BSSE23043/DBMS_Final_Project_G4" target="_blank" class="btn">View Source</a>
+            </article>
 
-        <article>
-            <h3>Cloud Based E-Commerce Website - ShopSwift</h3>
-            <p>
-                A basic website for shopping using AWS services.
-            </p>
-            <p><strong>Technologies Used:</strong> AWS, Commerce Tool, HTML, CSS, React, JS, Tailwind</p>
-            <p>
-                <a href="https://github.com/BSSE23079/SDC_Project_ShopSwift" target="_blank">
-                    GitHub Repository
-                </a>
-            </p>
-        </article>
+            <article class="project-card" data-category="cloud">
+                <div class="project-header">
+                    <h3>ShopSwift</h3>
+                    <span class="tag">Cloud</span>
+                </div>
+                <p>High-performance e-commerce engine leveraging AWS serverless architecture for global scale.</p>
+                <div class="tech-stack">AWS • Tailwind • React</div>
+                <a href="https://github.com/BSSE23079/SDC_Project_ShopSwift" target="_blank" class="btn">View Source</a>
+            </article>
+        </div>
     </section>
 
-
     <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: zubairakhter678@email.com</p>
-        <p>
-            GitHub:
-            <a href="https://github.com/BSSE23079" target="_blank">
-                https://github.com/BSSE23079
+        <h2>Get in Touch</h2>
+        <div class="contact-grid">
+            <a href="mailto:zubairakhter678@email.com" class="contact-item-card">
+                <div class="icon-box">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email Icon" class="contact-img-icon">
+                </div>
+                <h3>Email</h3>
+                <p>zubairakhter678@email.com</p>
+                <span class="action-text">Send Message →</span>
             </a>
-        </p>
-        <p>
-            LinkedIn:
-            <a href="https://www.linkedin.com/in/muhammad-zubair-akhter-5031a7317/" target="_blank">
-                https://www.linkedin.com/in/muhammad-zubair-akhter-5031a7317/
+
+            <a href="https://github.com/BSSE23079" target="_blank" class="contact-item-card">
+                <div class="icon-box">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Icon" class="contact-img-icon inv">
+                </div>
+                <h3>GitHub</h3>
+                <p>@BSSE23079</p>
+                <span class="action-text">Follow Projects →</span>
             </a>
-        </p>
+
+            <a href="https://www.linkedin.com/in/muhammad-zubair-akhter-5031a7317/" target="_blank" class="contact-item-card">
+                <div class="icon-box">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn Icon" class="contact-img-icon">
+                </div>
+                <h3>LinkedIn</h3>
+                <p>Muhammad Zubair</p>
+                <span class="action-text">Let's Connect →</span>
+            </a>
+        </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Muhammad Zubair Akhter. All rights reserved.</p>
+        <p>&copy; 2026 Muhammad Zubair Akhter. Built with passion & code.</p>
     </footer>
 
+    <script src="app.js"></script>
 </body>
 </html>
