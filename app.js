@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (windowScroll / height) * 100;
         progressBar.style.width = scrolled + "%";
-    });
+    }, { passive: true });
 
     // 2. Project Filtering
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update active class
             filterButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
@@ -23,70 +22,77 @@ document.addEventListener('DOMContentLoaded', () => {
 
             projectCards.forEach(card => {
                 if (filter === 'all' || card.dataset.category === filter) {
-                    card.style.display = 'flex';
-                    setTimeout(() => card.style.opacity = '1', 10);
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0) scale(1)';
+                    }, 50);
                 } else {
                     card.style.opacity = '0';
-                    setTimeout(() => card.style.display = 'none', 300);
+                    card.style.transform = 'translateY(20px) scale(0.95)';
+                    setTimeout(() => card.style.display = 'none', 400);
                 }
             });
         });
     });
 
-    // 3. Section Scroll Reveal
-    const observerOptions = {
-        threshold: 0.15
+    // 3. Section Reveal with Intersection Observer
+    const observerOptions = { 
+        threshold: 0.05, 
+        rootMargin: '0px 0px -50px 0px' 
     };
-
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('reveal');
-                // Optional: stop observing once revealed
-                // observer.unobserve(entry.target);
+                entry.target.classList.add('reveal-active');
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('section, .project-card').forEach(el => {
-        el.style.opacity = "0";
-        el.style.transform = "translateY(30px)";
-        el.style.transition = "all 0.6s ease-out";
+    document.querySelectorAll('section, .project-card, .stat-item, .contact-item-card').forEach(el => {
+        el.classList.add('reveal-item');
         observer.observe(el);
     });
 
-    // Add revelation styles via JS for better control
-    const style = document.createElement('style');
-    style.innerHTML = `
-        .reveal {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-    `;
-    document.head.appendChild(style);
-
-    // 4. Typing Effect for Subtitle
-    const subtitle = document.querySelector('header h2');
-    if (subtitle) {
-        const text = subtitle.textContent;
-        subtitle.textContent = "";
-        let i = 0;
-        function type() {
-            if (i < text.length) {
-                subtitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(type, 100);
-            }
-        }
-        type();
+    // 4. Parallax Profile Image (Disabled for mobile/touch for performance)
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        window.addEventListener('mousemove', (e) => {
+            const profile = document.querySelector('.profile-container');
+            if (!profile) return;
+            const moveX = (e.clientX - window.innerWidth / 2) / 40;
+            const moveY = (e.clientY - window.innerHeight / 2) / 40;
+            profile.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        }, { passive: true });
     }
 
-    // 5. Parallax for Profile Image
-    window.addEventListener('mousemove', (e) => {
-        const img = document.querySelector('.profile-img');
-        if (!img) return;
-        const moveX = (e.clientX - window.innerWidth / 2) / 50;
-        const moveY = (e.clientY - window.innerHeight / 2) / 50;
-        img.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
+    // 5. Dynamic Active Nav State
+    const navItems = document.querySelectorAll('.dock-item');
+    window.addEventListener('scroll', () => {
+        let current = "";
+        const sections = document.querySelectorAll('section, header');
+        
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 300) {
+                current = section.getAttribute("id") || "header";
+            }
+        });
+
+        navItems.forEach((item) => {
+            item.classList.remove("active-nav");
+            const href = item.getAttribute("href").substring(1);
+            if (href === current || (current === "header" && href === "about")) {
+                item.classList.add("active-nav");
+            }
+        });
+    }, { passive: true });
+
+    // Inject active styles
+    const activeStyle = document.createElement('style');
+    activeStyle.innerHTML = `
+        .active-nav { background: var(--primary) !important; border-color: rgba(255,255,255,0.4) !important; }
+        .active-nav img { filter: brightness(0) invert(1) !important; }
+    `;
+    document.head.appendChild(activeStyle);
 });
